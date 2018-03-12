@@ -93,7 +93,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 training_epochs = 5000
 n_dim = features.shape[1]
-n_classes = 10 ###previous run was 2 layers 512 nodes each
+n_classes = 10 
 n_hidden_units_one = 256
 n_hidden_units_two = 256
 n_hidden_units_three = 256
@@ -116,9 +116,9 @@ W_3 = tf.Variable(tf.random_normal([n_hidden_units_one,n_hidden_units_two,n_hidd
 b_3 = tf.Variable(tf.random_normal([n_hidden_units_three], mean = 0, stddev=sd))
 h_3 = tf.nn.sigmoid(tf.matmul(h_2,W_3) + b_3 )
 
-W = tf.Variable(tf.random_normal([n_hidden_units_two, n_classes], mean=0, stddev=sd))
+W = tf.Variable(tf.random_normal([n_hidden_units_three, n_classes], mean=0, stddev=sd))
 b = tf.Variable(tf.random_normal([n_classes], mean=0, stddev=sd))
-y_ = tf.nn.softmax(tf.matmul(h_2, W) + b)
+y_ = tf.nn.softmax(tf.matmul(h_3, W) + b)
 
 init = tf.global_variables_initializer()
 saver = tf.train.Saver()
