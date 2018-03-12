@@ -1,3 +1,4 @@
+
 import glob
 import os
 import librosa
@@ -112,7 +113,7 @@ W_2 = tf.Variable(tf.random_normal([n_hidden_units_one,n_hidden_units_two], mean
 b_2 = tf.Variable(tf.random_normal([n_hidden_units_two], mean = 0, stddev=sd))
 h_2 = tf.nn.sigmoid(tf.matmul(h_1,W_2) + b_2 )
 
-W_3 = tf.Variable(tf.random_normal([n_hidden_units_one,n_hidden_units_two,n_hidden_units_three], mean = 0, stddev=sd))
+W_3 = tf.Variable(tf.random_normal([n_hidden_units_two,n_hidden_units_three], mean = 0, stddev=sd))
 b_3 = tf.Variable(tf.random_normal([n_hidden_units_three], mean = 0, stddev=sd))
 h_3 = tf.nn.sigmoid(tf.matmul(h_2,W_3) + b_3 )
 
