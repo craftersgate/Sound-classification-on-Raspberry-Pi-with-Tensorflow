@@ -38,7 +38,7 @@ def extract_features():
     features = np.vstack([features,ext_features])
     return features
 
-model_path = "model"
+model_path = "/models/sndmodel.ckpt"
 fit_params = np.load('fit_params.npy')
 sc = StandardScaler()
 sc.fit(fit_params)
@@ -47,7 +47,6 @@ n_dim = 161
 n_classes = 10
 n_hidden_units_one = 256
 n_hidden_units_two = 256
-n_hidden_units_three = 256
 sd = 1 / np.sqrt(n_dim)
 learning_rate = 0.01
 
@@ -62,13 +61,9 @@ W_2 = tf.Variable(tf.random_normal([n_hidden_units_one,n_hidden_units_two], mean
 b_2 = tf.Variable(tf.random_normal([n_hidden_units_two], mean = 0, stddev=sd))
 h_2 = tf.nn.sigmoid(tf.matmul(h_1,W_2) + b_2)
 
-W_3 = tf.Variable(tf.random_normal([n_hidden_units_one,n_hidden_units_two,n_hidden_units_three], mean = 0, stddev=sd))
-b_3 = tf.Variable(tf.random_normal([n_hidden_units_three], mean = 0, stddev=sd))
-h_3 = tf.nn.sigmoid(tf.matmul(h_2,W_3) + b_3 )
-
-W = tf.Variable(tf.random_normal([n_hidden_units_three,n_classes], mean = 0, stddev=sd))
+W = tf.Variable(tf.random_normal([n_hidden_units_two,n_classes], mean = 0, stddev=sd))
 b = tf.Variable(tf.random_normal([n_classes], mean = 0, stddev=sd))
-y_ = tf.nn.softmax(tf.matmul(h_3,W) + b)
+y_ = tf.nn.softmax(tf.matmul(h_2,W) + b)
 
 
 init = tf.global_variables_initializer()
@@ -86,3 +81,6 @@ with tf.Session() as sess:
         y_pred = sess.run(tf.argmax(y_, 1), feed_dict={X: feat})
         
         print (y_pred)
+
+
+
