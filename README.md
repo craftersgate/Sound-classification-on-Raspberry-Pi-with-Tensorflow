@@ -4,7 +4,7 @@
 
 #  BUILD THE PROJECT
 
-  The project is developed and tested with Python 2.7.
+  The project is developed and tested with Python 3.5.3
 
   Install following Python libraries on your PC/Workstation and Raspberry Pi:
   
